@@ -5,3 +5,6 @@
 # data folder
 /data
 /lorawan-devices
+
+# Certificates
+cert/
