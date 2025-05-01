@@ -12,6 +12,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./configuration/chirpstack:/etc/chirpstack
+      # - ./configuration/cert:/etc/certs:ro
     depends_on:
       - postgres
       - mosquitto
@@ -24,6 +25,7 @@ services:
       - "8080:8080"
     networks:
       - net_interface
+    user: "1000:1000"  # Match the host's ubuntu user UID:GID (run `id ubuntu` to confirm)
     # healthcheck:
     #   test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
     #   interval: 30s
@@ -93,8 +95,10 @@ services:
     restart: unless-stopped
     ports:
       - "1883:1883"
+      # - "8083:8083"
     volumes: 
       - ./configuration/mosquitto/config/:/mosquitto/config/
+      # - ./configuration/cert:/etc/certs:ro
     networks:
       - net_interface
 
