@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./configuration/chirpstack:/etc/chirpstack
-      # - ./configuration/certs:/etc/certs:ro
+      - ./configuration/certs:/etc/certs:ro
     depends_on:
       - postgres
       - mosquitto
