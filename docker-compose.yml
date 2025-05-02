@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./configuration/chirpstack:/etc/chirpstack
-      # - ./configuration/cert:/etc/certs:ro
+      # - ./configuration/certs:/etc/certs:ro
     depends_on:
       - postgres
       - mosquitto
@@ -95,10 +95,10 @@ services:
     restart: unless-stopped
     ports:
       - "1883:1883"
-      # - "8083:8083"
+      - "8883:8883"
     volumes: 
       - ./configuration/mosquitto/config/:/mosquitto/config/
-      # - ./configuration/cert:/etc/certs:ro
+      - ./configuration/mosquitto/certs:/etc/mosquitto/certs:ro
     networks:
       - net_interface
 
