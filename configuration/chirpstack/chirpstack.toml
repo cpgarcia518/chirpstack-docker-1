@@ -86,6 +86,36 @@
   #   openssl rand -base64 32
   secret="0498HWQm95srmWYLmua3OnCupSNRFxjbj5AaUk0jGFI="
 
+# Global gateway configuration.
+# Please note that backend configuration can be found in the per-region
+# configuration.
+[gateway]
+
+  # CA certificate and key file (optional).
+  #
+  # If setting the CA certificate and key file options, ChirpStack 
+  # will generate client certificates which can be used by the gateway for
+  # authentication and authorization. The Common Name of the certificate will
+  # be set to the Gateway ID.
+  #
+  # The ca_key is expected to be in PKCS#8 format (you can use openssl to
+  # convert to PKCS#8).
+  # ca_cert=""
+  ca_cert="/etc/certs/ca.pem"
+  # ca_key=""
+  ca_key="/etc/certs/ca-key.pem"
+  # Certificate lifetime.
+  #
+  # This defines how long (after generating) the certificate remains valid.
+  # client_cert_lifetime="11months 30days 3h 50m 24s"
+  client_cert_lifetime = "10y"
+
+  # Allow unknown gateways.
+  #
+  # If set to true, then uplinks received from gateways not configured in
+  # ChirpStack will be allowed.
+  allow_unknown_gateways=false
+
 
 [integration]
   enabled=["mqtt"]
@@ -162,6 +192,29 @@
     # tls_key="/etc/certs/client.key"
     tls_key=""
     # tls_key="/etc/certs/chirpstack-client-key.pem"
+
+      # Configuration for MQTT clients.
+      [integration.mqtt.client]
+
+      # CA certificate and key file (optional).
+      #
+      # If setting the CA certificate and key file options, ChirpStack 
+      # will generate client certificates which can be used by the MQTT clients for
+      # authentication and authorization. The Common Name of the certificate will
+      # be set to the ID of the application.
+      #
+      # The ca_key is expected to be in PKCS#8 format (you can use openssl to
+      # convert to PKCS#8).
+      # ca_cert=""
+      ca_cert="/etc/certs/ca.pem"
+      # ca_key=""
+      ca_key="/etc/certs/ca-key.pem"
+
+      # Certificate lifetime.
+      #
+      # This defines how long (after generating) the certificate remains valid.
+      client_cert_lifetime = "10y"
+      # client_cert_lifetime="11months 30days 3h 50m 24s"
 
 
 # UI configuration.
